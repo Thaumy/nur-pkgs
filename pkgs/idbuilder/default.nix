@@ -1,5 +1,5 @@
 { lib, pkgs, stdenv, fetchurl, runCommand, rustPlatform, makeDesktopItem
-, yarn2nix-moretea }:
+, fetchFromGitHub, yarn2nix-moretea }:
 
 let
   overlay_pkgs = pkgs.appendOverlays [
@@ -24,19 +24,24 @@ let
     type = "Application";
   };
 
-  src_ruster = builtins.fetchTarball {
-    url = "https://github.com/Thaumy/ruster/archive/refs/tags/v0.1.0.tar.gz";
+  src_ruster = fetchFromGitHub {
+    owner = "Thaumy";
+    repo = "ruster";
+    rev = "b98c4bd8ae2867e7eaba6de090a5df09ef9397f5";
     sha256 = "03p6r0lviasd1c5cq1xvhhafhs5r9fgzym5mfi802y9rwx7xjmpv";
   };
 
-  src_palaflake = builtins.fetchTarball {
-    url =
-      "https://github.com/Thaumy/palaflake/archive/refs/tags/v1.1.0-dev-rs.tar.gz";
+  src_palaflake = fetchFromGitHub {
+    owner = "Thaumy";
+    repo = "palaflake";
+    rev = "c8e76f1bc89a8dcd4a938cc1cd83a48897b688e0";
     sha256 = "0i82hijl4hmn4b47dl8xxzza9z7z5g7nfck99yqd5am0piwvz2gp";
   };
 
-  src_idbuilder = builtins.fetchTarball {
-    url = "https://github.com/Thaumy/IDBuilder/archive/refs/tags/v6.0.1.tar.gz";
+  src_idbuilder = fetchFromGitHub {
+    owner = "Thaumy";
+    repo = "palaflake";
+    rev = "b04f62af765ea8c68f9874e947f25c9fdb64807c";
     sha256 = "0sy5qg1mbd3q39dfi3iswx2jd5vr6znvginj6474dylhwhbn1ksk";
   };
 
