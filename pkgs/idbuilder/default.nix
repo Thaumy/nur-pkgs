@@ -2,14 +2,7 @@
 , fetchFromGitHub, yarn2nix-moretea }:
 
 let
-  overlay_pkgs = pkgs.extend
-    # use oxalica's rust-overlay to enable nightly
-    (import (fetchFromGitHub {
-      owner = "oxalica";
-      repo = "rust-overlay";
-      rev = "c8bf9c162bb3f734cf357846e995eb70b94e2bcd";
-      sha256 = "12mrh4pfb0ldb1w3mlfbzhabhas3q41w4daj0ccaxadiran4pxq5";
-    }));
+  overlay_pkgs = pkgs.extend (import ./rust-overlay);
 
   appBinName = "idbuilder";
   appVersion = "6.0.1";
