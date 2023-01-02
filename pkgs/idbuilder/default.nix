@@ -47,8 +47,11 @@ let
     version = appVersion;
     name = "${pname}_node_modules_${version}";
 
-    # yarn2nix only support yarn1, so need to place here a v1 lock file
+    # v1 lock file
     yarnLock = ./yarn.lock;
+    # generated from v1 lock file by yarn2nix
+    yarnNix = ./yarn.nix;
+
     packageJSON = "${src_idbuilder}/package.json";
   };
 
