@@ -71,7 +71,7 @@ let
     rust-bin.nightly.latest.minimal
   ];
 
-in rustPlatform.buildRustPackage rec {
+in rustPlatform.buildRustPackage {
   pname = appBinName;
   version = appVersion;
 
@@ -79,9 +79,9 @@ in rustPlatform.buildRustPackage rec {
   buildInputs = inputs;
   nativeBuildInputs = inputs;
 
-  src = "${src_idbuilder}/src-tauri";
+  src = ./.;
 
-  cargoLock = { lockFile = "${src}/Cargo.lock"; };
+  cargoLock.lockFile = ./Cargo.lock;
 
   # TODO: why it failed with 666 permission?
   buildPhase = ''
