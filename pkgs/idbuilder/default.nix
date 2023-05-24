@@ -1,9 +1,12 @@
-{ lib, pkgs, stdenv, fetchurl, runCommand, rustPlatform, makeDesktopItem
-, fetchFromGitHub, yarn2nix-moretea }:
+{ lib
+, pkgs
+, rustPlatform
+, makeDesktopItem
+, fetchFromGitHub
+, yarn2nix-moretea
+}:
 
 let
-  overlay_pkgs = pkgs.extend (import ./rust-overlay);
-
   appBinName = "idbuilder";
   appVersion = "6.0.4";
   appComment = "More than an identifier building tool";
@@ -55,8 +58,11 @@ let
     packageJSON = "${src_idbuilder}/package.json";
   };
 
-  inputs = with overlay_pkgs; [
-    jq
+  rust-overlay = import (builtins.fetchTarball "https://github.com/oxalica/rust-overlay/archive/master.tar.gz");
+
+  extended-pkgs = pkgs.extend (rust-overlay);
+
+  runTimeDeps = with extended-pkgs; [
     gtk3
     glib
     dbus
@@ -65,20 +71,23 @@ let
     webkitgtk
     openssl_3
     gdk-pixbuf
+  ];
+
+  buildTimeDeps = with extended-pkgs; runTimeDeps ++ [
     pkg-config
     appimagekit
 
+    jq
     yarn
-    rust-bin.nightly.latest.minimal
+    rust-bin.nightly."2023-05-24".minimal
   ];
-
-in rustPlatform.buildRustPackage {
+in
+rustPlatform.buildRustPackage {
   pname = appBinName;
   version = appVersion;
 
-  # TODO: here could be simplified
-  buildInputs = inputs;
-  nativeBuildInputs = inputs;
+  nativeBuildInputs = buildTimeDeps;
+  buildInputs = runTimeDeps;
 
   src = ./.;
 
@@ -99,7 +108,7 @@ in rustPlatform.buildRustPackage {
     mv deps src-tauri
 
     cd src-tauri
-    cargo build --release
+    cargo build -r
   '';
 
   installPhase = ''
