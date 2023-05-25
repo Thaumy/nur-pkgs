@@ -6,9 +6,6 @@ on:
       - main
       - master
   schedule:
-    # rebuild everyday at 2:51
-    # TIP: Choose a random time here so not all repositories are build at once:
-    # https://www.random.org/clock-times/?num=1&earliest=01%3A00&latest=08%3A00&interval=5&format=html&rnd=new
     - cron:  '0 0 * * *'
 jobs:
   tests:
@@ -30,9 +27,9 @@ jobs:
         # For this to work, you also need to set the CACHIX_SIGNING_KEY or
         # CACHIX_AUTH_TOKEN secret in your repository secrets settings in
         # Github found at
-        # https://github.com/<your_githubname>/nur-packages/settings/secrets
+        # https://github.com/thaumy/nur-pkgs/settings/secrets
         cachixName:
-          - <YOUR_CACHIX_NAME>
+          - thaumy
         nixPath:
           - nixpkgs=channel:nixos-unstable
           - nixpkgs=channel:nixpkgs-unstable
