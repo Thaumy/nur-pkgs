@@ -8,5 +8,5 @@ nix-env -f . -qa \* --meta \
   --option allow-import-from-derivation true \
   --drv-path --show-trace \
   -I nixpkgs=$(nix-instantiate --find-file nixpkgs) \
-  -I ./ \
-  --json | jq -r 'values | .[].name'
+  -I $PWD \
+  --json
