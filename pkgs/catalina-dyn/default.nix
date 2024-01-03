@@ -8,8 +8,8 @@ let
   src = fetchFromGitHub {
     owner = "Thaumy";
     repo = "gnome-dyn-wallpapers";
-    rev = "df8472e660e0d1b1c96f72c8d2b43d3824de65d3";
-    hash = "sha256-uQTfufw1xnNy5EiYJueEtTHErDLpUlJQAAL0IZEu8sw=";
+    rev = "1f9ab3063967a675bf3b5f34dfa852dfc42663b2";
+    hash = "sha256-wT+BPGFfZG8EUG5n4grIxRFFo9cqPj8qVA09RPKBRV4=";
   };
 in
 stdenv.mkDerivation {
