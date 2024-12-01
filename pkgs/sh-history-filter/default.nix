@@ -3,7 +3,6 @@
 , rustPlatform
 , fetchFromGitHub
 }:
-
 let
   appBinName = "sh-history-filter";
   appVersion = "0.0.4";

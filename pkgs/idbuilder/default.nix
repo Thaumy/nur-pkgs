@@ -5,7 +5,6 @@
 , fetchFromGitHub
 , yarn2nix-moretea
 }:
-
 let
   appBinName = "idbuilder";
   appVersion = "6.0.4";

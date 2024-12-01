@@ -3,7 +3,6 @@
 , rustPlatform
 , fetchFromGitHub
 }:
-
 let
   appBinName = "dup-img-finder";
   appVersion = "0.2.0";
